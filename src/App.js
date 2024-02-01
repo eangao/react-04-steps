@@ -448,7 +448,7 @@ const messages = [
 
 export default function App() {
   let [step, setStep] = useState(1);
-  let [test, setTest] = useState({ name: "Elmar" });
+  const [isOpen, setIsOpen] = useState(true); //initial value
 
   function handlePrevious() {
     if (step > 1) setStep(step - 1);
@@ -456,36 +456,86 @@ export default function App() {
 
   function handleNext() {
     if (step < 3) setStep(step + 1);
-
-    setTest({ name: "Fred" });
   }
 
   return (
-    <div className="steps">
-      <div className="numbers">
-        <div className={step >= 1 ? "active" : ""}>1</div>
-        <div className={step >= 2 ? "active" : ""}>2</div>
-        <div className={step >= 3 ? "active" : ""}>3</div>
-      </div>
+    //     we first needed to create
+    // this div element here outside,
+    // basically to start our JSX.
+    // And so then inside that JSX
+    // is where we can enter the JavaScript mode.
 
-      <p className="message">
-        Step {step}: {messages[step - 1]} {test.name}
-      </p>
+    //     And we need this JavaScript mode here
+    // because now we will use our isOpen.
+    // And then as for the conditional rendering,
 
-      <div className="buttons">
-        <button
-          style={{ backgroundColor: "#7950f2", color: "#fff" }}
-          onClick={handlePrevious}
-        >
-          Previous
-        </button>
-        <button
-          style={{ backgroundColor: "#7950f2", color: "#fff" }}
-          onClick={handleNext}
-        >
-          Next
-        </button>
-      </div>
-    </div>
+    //  /* /////// -it will return one element   */
+    //  /* <div> */
+
+    <>
+      {/* /* /////// -it will return one element   */}
+      {/* /* <div> */}
+
+      {/* So instead of creating a handle function out here like these two, I will
+      now define the function directly here. So just to show you that sometimes
+      this is also what we do especially when we have some very simple logic. So
+      we need to create a new function, and now what do we want to do here?
+      Well, we want to update the isOpen state. So set isOpen, and then again,
+      we need to pass in the new state, so the updated state. And what should
+      that be? Well, it should always be the opposite of the current state. So
+      if this open is true, it should become false, and if it's false, it should
+      become true. And the way we do that is by using the not operator. So
+      again, that's just common and standard JavaScript. Okay, and this should
+      now already work. So let's just reload here to get rid of that error. And
+      yes, beautiful. */}
+      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+        &times;
+      </button>
+      {isOpen && (
+        <div className="steps">
+          <div className="numbers">
+            <div className={step >= 1 ? "active" : ""}>1</div>
+            <div className={step >= 2 ? "active" : ""}>2</div>
+            <div className={step >= 3 ? "active" : ""}>3</div>
+          </div>
+
+          <p className="message">
+            Step {step}: {messages[step - 1]}
+          </p>
+
+          <div className="buttons">
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handlePrevious}
+            >
+              Previous
+            </button>
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+      {/* /////// -it will return one element   */}
+      {/* </div> */}
+
+      {/* // is that we actually don't want to return // just one element here. //
+      So we want to return basically both, // this part here and the button. //
+      And so this means // that this is a great use case for a React fragment
+      here. // So before I do that, let's just inspect. // And so indeed, we
+      have our root // which is basically everything, // so the entire app. //
+      And then in there, we have this div, which is this one. // But again,
+      let's say we don't want that. // Let's say, we just want to have the
+      button // and then this steps div. // So let's remove this from here and
+      from here. // And so now we have remember a fragment. // So that's like
+      the root of this JSX element here // which will then disappear in the DOM.
+      // So if we take a look now // then we only have this button and the step
+      div. // So again, whenever you are in a situation like this, // so what
+      you need a piece of JSX to return two elements, // then the fragment is
+      great for that. */}
+    </>
   );
 }
