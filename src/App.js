@@ -155,3 +155,16 @@ export default function App() {
     </div>
   );
 }
+
+////////////////////////////////////////////////////////////////////////
+// What is State in React?
+////////////////////////////////////////////////////////////////////////
+
+// see pdf lecture and video
+
+// So we learned how to use event handlers,
+// but, now, we want them
+// to actually do something useful, right?
+// So we want to make the component interactive.
+// And for that,
+// as I have mentioned already, we need state.
