@@ -308,14 +308,86 @@ const messages = [
 // to update state manually.
 
 export default function App() {
-  const [step, setStep] = useState(1);
+  //   So, let's change this to a let
+  // and so then we can actually break this.
+  // So, let's say the tier in handle next,
+  // instead of updating the state in the correct way,
+  let [step, setStep] = useState(1);
+
+  ////////////
+  // BAD PRACTICE
+  // let [test] = useState({ name: "Elmar" });
+
+  let [test, setTest] = useState({ name: "Elmar" });
 
   function handlePrevious() {
     if (step > 1) setStep(step - 1);
   }
 
   function handleNext() {
+    // if (step < 3) setStep(step + 1);
+
+    //     And so right now, this is a let variable,
+    // so a variable that we can update.
+    // And so again, this would be a perfectly normal way
+    // of updating variables in JavaScript.
+
+    // But let's see what now happens when we click this button.
+    // Well, simply nothing happens.
+
+    // So, we don't get any error from React,
+    // but simply nothing happens.
+    // And so, the reason for that is that React has no way
+    // of knowing that this is actually trying to update the state.
+    // So, React has no magic way of knowing
+    // that this here is the state variable
+    // and that this operation is basically updating it.
+    // So again, React doesn't know about that
+    // and that's why React provided us
+    // with this setter function here, which is a functional way
+    // of updating the state value, but without mutating it.
+
+    // Because here we are directly mutating now
+    // this step variable, right?
+    // But React is all about immutability.
+    // And so, therefore, we can only update the state using
+    // the tools that React gives us.
+    // So, in this case, this set step function.
+    ////////
+    // step = step + 1;
+
+    /////////////////
     if (step < 3) setStep(step + 1);
+
+    ////////////
+    // BAD PRACTICE
+    // test.name = "Fred";
+    //////////
+    //     However, mutating objects like this is a really,
+    // really bad practice.
+    // So, React really doesn't want you to do this
+    // and that's because sometimes, in more complex situations,
+    // this actually won't work.
+    // And in general, it's really just a bad practice
+    // of mutating objects like this,
+    // especially in a framework like React,
+    // which is all about immutability
+    // and functional state updates.
+    // So, never do this.
+    // So, if you really wanted to update this object here,
+    // we would again create a setter function here.
+    // So, not creating, but basically taking this setter function
+    // out of the result of use state.
+    // And then here we would call that setter function
+    // and then pass in the complete new object.
+    // So, the name should now be Fred.
+    setTest({ name: "Fred" });
+
+    // So, always treat state as immutable in React.
+    // So, as something that you cannot change directly,
+    // but that you can only change using the tools
+    // that React gives us.
+    // So, using the state setter function.
   }
 
   return (
@@ -327,7 +399,7 @@ export default function App() {
       </div>
 
       <p className="message">
-        Step {step}: {messages[step - 1]}
+        Step {step}: {messages[step - 1]} {test.name}
       </p>
 
       <div className="buttons">
