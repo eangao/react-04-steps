@@ -539,3 +539,60 @@ export default function App() {
     </>
   );
 }
+
+////////////////////////////////////////////////////////////
+// React Developer Tools
+////////////////////////////////////////////////////////////
+// SEE VIDEO
+
+// As web developers, we rely a lot
+// on Developer Tools.
+// So things like the Console
+// or the Element Inspect panel in our browser.
+
+// And so since tools are so helpful for developers
+// the React team built dev tools specific for React
+// which can be extremely helpful when working with State.
+// And so since we're working with State now,
+
+// CHROME DEV TOOLS
+// https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?pli=1
+
+// once you have these developer tools here already open,
+// you'll see one tab which appears here
+// or actually two which are coming from the React dev tools.
+
+// So that's this
+// Component tab
+// and this Profiler tab.
+
+// So Components, basically, as the name says, is
+// for showing a component tree
+// Now, right now we only have one component, so only
+// the app component, and so then this
+// is the only one that we can see here.
+// But if we had more, then all of them
+// would be showing up down here
+// and we could see our entire component tree.
+// So I will show you this again once we have that.
+// The point here now is that we can take a look
+// at all the State that is inside each component.
+
+// And so this is very, very important to keep in
+// mind that you can use the dev tools for this kind of thing.
+// So that's one thing.
+// And as I mentioned earlier
+// it's also very useful to be able to see the
+// entire component tree right here because
+// when we have many, many files in a project and dozens
+// or even hundreds of components in our app maybe,
+// then it can become quickly out of hand
+// and we can lose sight which components are where.
+// And so then a component tree can become very handy.
+// So instead of drawing that manually
+// we just come here and there it is.
+// Okay, and that's for now all I had to tell you
+// about these dev tools.
+// Very handy.
+// Make sure that you install them and we will come
+// back to them in future lectures, for sure.
