@@ -297,27 +297,157 @@ const messages = [
 //   );
 // }
 
-//////////////////////////////////////////////////////////////////
-// Don't Set State Manually!
-//////////////////////////////////////////////////////////////////
-// By the end of the last lecture,
-// I said that we should only update state using
-// the setter function, but don't just trust me on that.
-// So, instead, let's actually explore this and break React.
-// So, just to see what happens when we try
-// to update state manually.
+// //////////////////////////////////////////////////////////////////
+// // Don't Set State Manually!
+// //////////////////////////////////////////////////////////////////
+// // By the end of the last lecture,
+// // I said that we should only update state using
+// // the setter function, but don't just trust me on that.
+// // So, instead, let's actually explore this and break React.
+// // So, just to see what happens when we try
+// // to update state manually.
+
+// export default function App() {
+//   //   So, let's change this to a let
+//   // and so then we can actually break this.
+//   // So, let's say the tier in handle next,
+//   // instead of updating the state in the correct way,
+//   let [step, setStep] = useState(1);
+
+//   ////////////
+//   // BAD PRACTICE
+//   // let [test] = useState({ name: "Elmar" });
+
+//   let [test, setTest] = useState({ name: "Elmar" });
+
+//   function handlePrevious() {
+//     if (step > 1) setStep(step - 1);
+//   }
+
+//   function handleNext() {
+//     // if (step < 3) setStep(step + 1);
+
+//     //     And so right now, this is a let variable,
+//     // so a variable that we can update.
+//     // And so again, this would be a perfectly normal way
+//     // of updating variables in JavaScript.
+
+//     // But let's see what now happens when we click this button.
+//     // Well, simply nothing happens.
+
+//     // So, we don't get any error from React,
+//     // but simply nothing happens.
+//     // And so, the reason for that is that React has no way
+//     // of knowing that this is actually trying to update the state.
+//     // So, React has no magic way of knowing
+//     // that this here is the state variable
+//     // and that this operation is basically updating it.
+//     // So again, React doesn't know about that
+//     // and that's why React provided us
+//     // with this setter function here, which is a functional way
+//     // of updating the state value, but without mutating it.
+
+//     // Because here we are directly mutating now
+//     // this step variable, right?
+//     // But React is all about immutability.
+//     // And so, therefore, we can only update the state using
+//     // the tools that React gives us.
+//     // So, in this case, this set step function.
+//     ////////
+//     // step = step + 1;
+
+//     /////////////////
+//     if (step < 3) setStep(step + 1);
+
+//     ////////////
+//     // BAD PRACTICE
+//     // test.name = "Fred";
+//     //////////
+//     //     However, mutating objects like this is a really,
+//     // really bad practice.
+//     // So, React really doesn't want you to do this
+//     // and that's because sometimes, in more complex situations,
+//     // this actually won't work.
+//     // And in general, it's really just a bad practice
+//     // of mutating objects like this,
+//     // especially in a framework like React,
+//     // which is all about immutability
+//     // and functional state updates.
+//     // So, never do this.
+//     // So, if you really wanted to update this object here,
+//     // we would again create a setter function here.
+//     // So, not creating, but basically taking this setter function
+//     // out of the result of use state.
+//     // And then here we would call that setter function
+//     // and then pass in the complete new object.
+//     // So, the name should now be Fred.
+//     setTest({ name: "Fred" });
+
+//     // So, always treat state as immutable in React.
+//     // So, as something that you cannot change directly,
+//     // but that you can only change using the tools
+//     // that React gives us.
+//     // So, using the state setter function.
+//   }
+
+//   return (
+//     <div className="steps">
+//       <div className="numbers">
+//         <div className={step >= 1 ? "active" : ""}>1</div>
+//         <div className={step >= 2 ? "active" : ""}>2</div>
+//         <div className={step >= 3 ? "active" : ""}>3</div>
+//       </div>
+
+//       <p className="message">
+//         Step {step}: {messages[step - 1]} {test.name}
+//       </p>
+
+//       <div className="buttons">
+//         <button
+//           style={{ backgroundColor: "#7950f2", color: "#fff" }}
+//           onClick={handlePrevious}
+//         >
+//           Previous
+//         </button>
+//         <button
+//           style={{ backgroundColor: "#7950f2", color: "#fff" }}
+//           onClick={handleNext}
+//         >
+//           Next
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+///////////////////////////////////////////////////////////////
+// The Mechanics of State
+///////////////////////////////////////////////////////////////
+
+//  see pdf lecture and video
+
+// Okay, so we have just seen the power of state
+// by using the useState function,
+// but now let's get a better understanding
+// of how exactly state works in React.
+// And let's start from a fundamental React principle
+// that we have already discussed earlier.
+
+///////////////////////////////////////////////////////////////
+// Adding Another Piece of State
+///////////////////////////////////////////////////////////////
+// o practice state a little bit more,
+// let's now implement the open and close functionality
+// for our component.
+
+// So looking at the demo here,
+// what we want to implement now is this functionality
+// that when we click this button here,
+// then this part of the component disappears,
+// and then when we click it again, then it is back.
 
 export default function App() {
-  //   So, let's change this to a let
-  // and so then we can actually break this.
-  // So, let's say the tier in handle next,
-  // instead of updating the state in the correct way,
   let [step, setStep] = useState(1);
-
-  ////////////
-  // BAD PRACTICE
-  // let [test] = useState({ name: "Elmar" });
-
   let [test, setTest] = useState({ name: "Elmar" });
 
   function handlePrevious() {
@@ -325,69 +455,9 @@ export default function App() {
   }
 
   function handleNext() {
-    // if (step < 3) setStep(step + 1);
-
-    //     And so right now, this is a let variable,
-    // so a variable that we can update.
-    // And so again, this would be a perfectly normal way
-    // of updating variables in JavaScript.
-
-    // But let's see what now happens when we click this button.
-    // Well, simply nothing happens.
-
-    // So, we don't get any error from React,
-    // but simply nothing happens.
-    // And so, the reason for that is that React has no way
-    // of knowing that this is actually trying to update the state.
-    // So, React has no magic way of knowing
-    // that this here is the state variable
-    // and that this operation is basically updating it.
-    // So again, React doesn't know about that
-    // and that's why React provided us
-    // with this setter function here, which is a functional way
-    // of updating the state value, but without mutating it.
-
-    // Because here we are directly mutating now
-    // this step variable, right?
-    // But React is all about immutability.
-    // And so, therefore, we can only update the state using
-    // the tools that React gives us.
-    // So, in this case, this set step function.
-    ////////
-    // step = step + 1;
-
-    /////////////////
     if (step < 3) setStep(step + 1);
 
-    ////////////
-    // BAD PRACTICE
-    // test.name = "Fred";
-    //////////
-    //     However, mutating objects like this is a really,
-    // really bad practice.
-    // So, React really doesn't want you to do this
-    // and that's because sometimes, in more complex situations,
-    // this actually won't work.
-    // And in general, it's really just a bad practice
-    // of mutating objects like this,
-    // especially in a framework like React,
-    // which is all about immutability
-    // and functional state updates.
-    // So, never do this.
-    // So, if you really wanted to update this object here,
-    // we would again create a setter function here.
-    // So, not creating, but basically taking this setter function
-    // out of the result of use state.
-    // And then here we would call that setter function
-    // and then pass in the complete new object.
-    // So, the name should now be Fred.
     setTest({ name: "Fred" });
-
-    // So, always treat state as immutable in React.
-    // So, as something that you cannot change directly,
-    // but that you can only change using the tools
-    // that React gives us.
-    // So, using the state setter function.
   }
 
   return (
@@ -419,16 +489,3 @@ export default function App() {
     </div>
   );
 }
-
-///////////////////////////////////////////////////////////////
-// The Mechanics of State
-///////////////////////////////////////////////////////////////
-
-//  see pdf lecture and video
-
-// Okay, so we have just seen the power of state
-// by using the useState function,
-// but now let's get a better understanding
-// of how exactly state works in React.
-// And let's start from a fundamental React principle
-// that we have already discussed earlier.
