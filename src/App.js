@@ -419,3 +419,16 @@ export default function App() {
     </div>
   );
 }
+
+///////////////////////////////////////////////////////////////
+// The Mechanics of State
+///////////////////////////////////////////////////////////////
+
+//  see pdf lecture and video
+
+// Okay, so we have just seen the power of state
+// by using the useState function,
+// but now let's get a better understanding
+// of how exactly state works in React.
+// And let's start from a fundamental React principle
+// that we have already discussed earlier.
