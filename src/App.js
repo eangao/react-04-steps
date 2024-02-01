@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
@@ -183,22 +185,94 @@ const messages = [
 // we now need to add a new piece of state to our component.
 
 export default function App() {
-  const step = 1;
+  // So in order to use state in practice in a component,
+  // we do it in three steps.
+
+  // First, we add a new state variable,
+
+  // Second, we use it in a code and usually in JSX.
+
+  // And third, we then update the piece of state
+  // in some event handler.
+
+  //   the use state function is a function,
+  // and so it takes an argument,
+  // and the argument that we need to specify here
+  // is the default value of this state variable..
+
+  // Now this use state function here
+  // will return an array.
+  ///////
+  // const arr = useState(1);
+  // console.log(arr);
+  //   And so you see it has two values here.
+  // So this first value, so this number one,
+  // is the default value that we want for our state.
+  // So this one here.
+  // And then the second one is a function
+  // that we can use to update our state variable.
+  // So what we usually do
+  // is to then immediately destructure this array right here.
+  // So first we have step, which again is this first right here.
+  // And so this will be our state variable itself.
+  // And then second, again, we have the function.
+  // And so this one we usually call set
+  // and then the name of the state variable.
+  // So set step in this case.
+
+  const [step, setStep] = useState(1);
+  //   Now just a few more things
+  // about the creation of the state variable here.
+  // So first of all, this use state function here
+  // is what we call a hook in React.
+
+  // And we can identify hooks
+  // because they start with this use keyword here.
+  // So all the React functions that start with use like this,
+  // for example, use effect or use reducer,
+  // and of course, this use state, are React hooks.
+
+  // And we will learn in detail
+  // what a React hook is a bit later.
+
+  // But for now, what you need to know
+  // is that we can only call hooks
+  // like use state, on the top level of the function.
+  // So of this App component function right here.
+  // So only here is it allowed to call use state
+  // not inside an if statement,
+  // or inside another function, or inside a loop.
+
+  //  the other important thing about state
+  // is that we should really only update state
+  // using this setter function right here.
+  // So not manually.
 
   function handlePrevious() {
-    alert("Previous");
+    if (step > 1) setStep(step - 1);
   }
 
   function handleNext() {
-    alert("Next");
+    if (step < 3) setStep(step + 1);
   }
 
   return (
     <div className="steps">
       <div className="numbers">
-        <div className={`${step >= 1 ? "active" : ""}`}>1</div>
+        {/* <div className={`${step >= 1 ? "active" : ""}`}>1</div>
         <div className={`${step >= 2 ? "active" : ""}`}>2</div>
-        <div className={`${step >= 3 ? "active" : ""}`}>3</div>
+        <div className={`${step >= 3 ? "active" : ""}`}>3</div> */}
+
+        {/* So there is no need for a template literal here
+        because here we are not really creating a new string.
+        We are just basically outputting a new string
+        based here on this turnery operator.
+        we now have this nice dynamic component
+        all without the imperative dom manipulations
+        that we need in vanilla JavaScript. */}
+        <div className={step >= 1 ? "active" : ""}>1</div>
+        <div className={step >= 2 ? "active" : ""}>2</div>
+        <div className={step >= 3 ? "active" : ""}>3</div>
       </div>
 
       <p className="message">
