@@ -611,16 +611,130 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(true);
 
   function handlePrevious() {
-    if (step > 1) setStep(step - 1);
+    // So, the way that we have been doing it.
+    // Instead, what we should do is to pass
+    // in a callback function here.
+    // So instead of a value, we pass a function,
+    // which will receive as the argument,
+    // the current value of the state.
+    /////
+    // if (step > 1) setStep(step - 1);
+
+    // So, let's remove this here and let's create a function,
+    // and I will just create a simple arrow function here.
+    // And so as I was saying, this will receive, as an input,
+    // the current value of the state.
+    // Now, there are multiple conventions on how
+    // to call this argument.
+    // So, we could again call it step,
+    // but this might then be a bit confusing.
+    // We can call it the current step, for example, or just S.
+    // And so this is what I'm going to do now.
+    // So, just an abbreviation.
+    // And so then, here we can do S minus one, just like before.
+    // And so this will now work the exact same way, right?
+    // So, the view here was updated in the same way as before,
+    // but this is a little bit more correct,
+    // because if we do this here,
+    if (step > 1) setStep((s) => s - 1);
   }
 
+  //   Now, the way we are doing it right now
+  // is working just fine, right?
+  // So, our app works fine, but now let's imagine that
+  // after a few months, we come back to this app
+  // and then we want to change something.
+  // So, let's say that we want this handle next function here
+  // to actually move forward twice.
+  // So, let's say that we want to set the step state twice.
+  // So, there's nothing stopping us from doing that.
+  // So, we can do this once and duplicate it.
+  // So, this is perfectly fine.
+  // We can call the same function twice.
+  // But what? What happens now?
+  // So, what do you think is going to happen
+  // when I click next now?
+  // So, in theory, it should take the step,
+  // which is currently one, at one, so two,
+  // and then here it should do the same
+  // from two to three, right?
+  // But again, watch what happens.
+  // So, it only updated the state once.
+  // Now, we will go into detail why exactly this happens.
+  // But for now, what I need you to know is
+  // that we should not update state based
+  // on the current state like this.
+
+  // So, the way that we have been doing it.
+  // Instead, what we should do is to pass
+  // in a callback function here.
+  // So instead of a value, we pass a function,
+  // which will receive as the argument,
+  // the current value of the state.
   function handleNext() {
-    if (step < 3) setStep(step + 1);
+    if (step < 3) {
+      // So, we can do this once and duplicate it.
+      // So, this is perfectly fine.
+      // We can call the same function twice.
+      // But what? What happens now?
+      // So, what do you think is going to happen
+      // when I click next now?
+      // So, in theory, it should take the step,
+      // which is currently one, at one, so two,
+      // and then here it should do the same
+      // from two to three, right?
+      // But again, watch what happens.
+      // So, it only updated the state once.
+      // Now, we will go into detail why exactly this happens.
+      // But for now, what I need you to know is
+      // that we should not update state based
+      // on the current state like this.
+      ///
+      // setStep(step + 1);
+      // setStep(step + 1);
+
+      // So, the way that we have been doing it.
+      // Instead, what we should do is to pass
+      // in a callback function here.
+      // So instead of a value, we pass a function,
+      // which will receive as the argument,
+      // the current value of the state.
+
+      //  this is a little bit more correct,
+      // because if we do this here,
+
+      // so again, receiving the current step as an input,
+      // which we just call S, but it could be called anything.
+      // And so then here we return that current step plus one
+      // and the same here, plus one.
+      // And so if we run this again, then it works.
+      // So then, it is updating the state twice.
+
+      // So, it started at one, then, therefore,
+      // this callback here received the value of one,
+      // and then one plus one was two.
+      // And then here in the next state up,
+      // that updated value is already passed here
+      // into this callback.
+      // And so then we have two plus one, which makes three.
+
+      // Now, here we actually do not want this, of course,
+      // so we just want to move forwards by one.
+      /////////
+      // setStep((s) => s + 1);
+      // setStep((s) => s + 1);
+
+      // But in order to be safe for future updates,
+      // it's a good idea to always use a callback like this
+      // when we want to update state based on the current value
+      // of that state.
+      setStep((s) => s + 1);
+    }
   }
 
   return (
     <>
-      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+      <button className="close" onClick={() => setIsOpen((isOpen) => !isOpen)}>
         &times;
       </button>
       {isOpen && (
@@ -654,3 +768,32 @@ export default function App() {
     </>
   );
 }
+
+// Now, when we're not setting state based
+// on the current state, then of course we can just pass
+// in the value as normal.
+// So, just like we did here, for example.
+/////
+// setTest({name: "Elmar"})
+
+// So, that also happens sometimes.
+// And so in that case, we need no callback.
+// Then, we just pass in the new state value,
+// as we do here, and as we also had here previously.
+/////
+// setTest({name: "Elmar"})
+
+// So again, in many situations, that would work just fine.
+// So, before we only had the S minus one here
+// and nothing else and so that worked as well.
+/////
+// if (step > 1) setStep(step - 1);
+
+// But in order to be safe for future updates
+// or for working with coworkers, it's best to update the state
+// in a more safe way like this.
+// And so from now on, I will do this each time
+// that we update the state based on the current value
+// of the state.
+/////////
+// if (step > 1) setStep((s) => s - 1);
