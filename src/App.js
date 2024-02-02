@@ -827,7 +827,7 @@ const messages = [
 // to open and close the component.
 
 //////////////
-
+//////////////
 // There's just one small thing that I want to do here
 // which is going back to the previous lecture
 // where I told you that each component has
@@ -835,6 +835,15 @@ const messages = [
 // So what I want to do now is to prove that to you in code.
 
 export default function App() {
+  return (
+    <div>
+      <Steps />
+      <Steps />
+    </div>
+  );
+}
+
+function Steps() {
   let [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
 
@@ -849,7 +858,19 @@ export default function App() {
   }
 
   return (
-    <>
+    //     and then we want to have
+    // the steps two time.
+    // Now just a few more changes we need to do.
+    // So now since we have two components on the same page
+    // let's actually
+    // return a <div> instead of fragment <> ear so that the button
+    // and then these steps are all in the same place.
+    // And then just one quick change in the CSS please.
+    // So down here in the close
+    // let's just remove this line of code.
+    /* position: absolute; */
+
+    <div>
       <button className="close" onClick={() => setIsOpen((isOpen) => !isOpen)}>
         &times;
       </button>
@@ -881,6 +902,35 @@ export default function App() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
+
+// So we successfully reused our steps component.
+// So this is now no longer the app.
+// Again, it is steps, and we can nicely see that here
+// in the React dev tools.
+// So now we have a bit of a bigger component tree.
+// So we have app and then it has two child components.
+// So, but what I wanted to show you is that
+// as we change the state in this one, for example
+// the state here will stay the same.
+
+// And so even though both of them are steps component
+// the state in each of them is completely isolated.
+
+// So of course I can also close this one,
+// and this one stays open.
+// And we can obviously also see that down here
+// in the dev tools
+// with a bit more space even.
+// Yeah. So the first steps here
+// the state is three, and it is visible.
+
+// So that's this true here.
+// While the second one, the state is one
+// and it is not visible.
+// Okay, so that was just a small and quick demonstration.
+// And so now that we have used state a couple of times here
+// it's time for you to practice state
+// on your own in the upcoming coding challenge.
