@@ -797,3 +797,12 @@ export default function App() {
 // of the state.
 /////////
 // if (step > 1) setStep((s) => s - 1);
+
+//////////////////////////////////////////////////////////////
+// More Thoughts About State + State Guidelines
+//////////////////////////////////////////////////////////////
+// see pdf lecture and video
+
+// As we finish this first dive into state,
+// I want to share a few more important thoughts,
+// or ideas, about state, as well as some practical guidelines.
